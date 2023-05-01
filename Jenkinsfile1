@@ -1,0 +1,53 @@
+@Library('mylibrary')_
+pipeline
+{
+   agent any
+   stages
+   {
+       stage('ContinuosDownload')
+       {
+            steps
+            {
+                script
+                {
+                    cicd.newGit("maven")
+                }
+                
+            }
+       }
+      stage('ContinuosBuild')
+       {
+            steps
+            {
+                script
+                {
+                    cicd.newMaven()
+                }
+                
+            }
+       }
+       stage('ContinuosDeployment')
+       {
+            steps
+            {
+                script
+                {
+                    cicd.newDeploy("DeclarativePipelinewithSharedlibraries", "172.31.1.116", "test1")
+                }
+                
+            }
+       }
+       stage('ContinuosTesting')
+       {
+            steps
+            {
+                script
+                {
+                    cicd.newGit("FunctionalTesting")
+                    cicd.newTest("DeclarativePipelinewithSharedlibraries")
+                }
+                
+            }
+       }
+    }
+ }
