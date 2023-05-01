@@ -26,28 +26,5 @@ pipeline
                 
             }
        }
-       stage('ContinuosDeployment')
-       {
-            steps
-            {
-                script
-                {
-                    cicd.newDeploy("DeclarativePipelinewithSharedlibraries", "172.31.1.116", "test1")
-                }
-                
-            }
-       }
-       stage('ContinuosTesting')
-       {
-            steps
-            {
-                script
-                {
-                    cicd.newGit("FunctionalTesting")
-                    cicd.newTest("DeclarativePipelinewithSharedlibraries")
-                }
-                
-            }
-       }
     }
  }
